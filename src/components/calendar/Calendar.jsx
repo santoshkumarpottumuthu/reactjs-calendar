@@ -54,25 +54,31 @@ const Calendar = () => {
     return format(addDays(startOfCurrentWeek, i), 'EEEE MM/dd');
   });
 
-  return (
-    <div>
+
+  
+ return (
+  <div className="calendar-wrapper">
+    <div className="controls">
       <button aria-label="Go to previous week" onClick={prevWeek}>
         Previous Week
       </button>
       <button aria-label="Go to next week" onClick={nextWeek}>
         Next Week
       </button>
-      <div className="calendar-container">
-        {days.map((day) => (
+    </div>
+    <div className="calendar-container">
+      <div className="time-labels-container">
+          
+        {hours.map(hour => (
+          <div key={hour} className="time-label">{}</div>
+        ))}
+      </div>
+      <div className="days-container">
+        {days.map(day => (
           <div key={day} className="day-container">
-            <h3 style={{width : "50%"}}>{day}</h3>
-            <div 
-              className="day-slots-container"
-              onMouseDown={() => setIsDragging(true)}
-              onMouseLeave={handleMouseUp}
-              onMouseUp={handleMouseUp}
-            >
-              {hours.map((hour) => {
+            <h3>{day}</h3>
+            <div className="time-slots-container">
+              {hours.map(hour => {
                 const key = `${day}-${hour}`;
                 return (
                   <div
@@ -91,7 +97,8 @@ const Calendar = () => {
         ))}
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default Calendar;
